@@ -19,20 +19,6 @@ NOTE: Currently, the application uses random placeholder images for development 
 - **Build Tool**: Vite
 - **AI API**: OpenAI DALL-E (configured but currently using placeholder images)
 
-## Project Structure
-
-```
-├── server.js          # Express server
-├── index.html         # Main HTML file
-├── package.json       # Dependencies and scripts
-├── .env              # Environment variables
-├── src/
-│   ├── main.js       # Frontend JavaScript
-│   └── style.css     # Styles
-└── public/
-    └── vite.svg      # Favicon
-```
-
 ## Usage
 
 1. Enter a descriptive prompt in the textarea
