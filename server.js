@@ -1,36 +1,46 @@
 import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
-import OpenAI from "openai";
-// import { APIClient } from "openai/core.mjs";
-dotenv.config();
 
-const openai = new OpenAI({
-  apiKey: process.env.OPENAI,
-});
+dotenv.config();
 
 const app = express();
 app.use(cors());
 app.use(express.json());
 
+// Array of random image URLs
+const getRandomImage = (prompt) => {
+  //  Picsum (completely random)
+  const randomId = Math.floor(Math.random() * 1000) + 1;
+  return `https://picsum.photos/1024/1024?random=${randomId}`;
+};
+
 app.post("/image", async (req, res) => {
   try {
-    const prompt = req.body.prompt;
-    const aiResponse = await openai.images.generate({
-      prompt,
-      n: 1,
-      size: "1024x1024",
-      response_format: "url",
-    });
+    console.log("Received request:", req.body);
 
-    const imageUrl = aiResponse.data[0].url;
-    res.send({ imageUrl });
+    const prompt = req.body.prompt;
+
+    if (!prompt || prompt.trim() === "") {
+      return res.status(400).json({ error: "Prompt is required" });
+    }
+
+    console.log("Generating random image for prompt:", prompt);
+
+    // Simulate API delay to make it feel realistic
+    await new Promise((resolve) => setTimeout(resolve, 2000));
+
+    const imageUrl = getRandomImage(prompt);
+
+    console.log("Random image URL generated:", imageUrl);
+    res.json({ imageUrl });
   } catch (error) {
-    console.error("Error generating image:", error);
-    res.status(500).send({ error: "Failed to generate image" });
+    console.error("Error:", error);
+    res.status(500).json({ error: "Failed to generate image" });
   }
 });
 
 app.listen(8080, () => {
   console.log("Server is running on port 8080 (http://localhost:8080)");
+  console.log("Using random images instead of AI generation");
 });

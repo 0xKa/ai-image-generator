@@ -51,7 +51,6 @@ form.addEventListener("submit", async (e) => {
   } finally {
     // Reset button state
     submitButton.disabled = false;
-    s;
     submitButton.textContent = "Submit";
     result.classList.remove("loading");
   }
