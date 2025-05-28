@@ -4,6 +4,36 @@ const form = document.querySelector("form");
 const result = document.querySelector("#result");
 const submitButton = form.querySelector("button[type='submit']");
 
+// Create copy button next to textarea (i'm using JS, instead of html to practice)
+const promptTextarea = form.querySelector("textarea[name='prompt']");
+const copyButton = document.createElement("button");
+copyButton.textContent = "Copy";
+copyButton.className = "copy-btn";
+copyButton.type = "button";
+copyButton.title = "Copy prompt to clipboard";
+
+promptTextarea.parentNode.appendChild(copyButton);
+//copy function
+const copyPrompt = async () => {
+  const prompt = promptTextarea.value.trim();
+  if (!prompt) {
+    copyButton.textContent = "Empty";
+    setTimeout(() => (copyButton.textContent = "Copy"), 1000);
+    return;
+  }
+
+  try {
+    await navigator.clipboard.writeText(prompt);
+    copyButton.textContent = "Copied";
+    setTimeout(() => (copyButton.textContent = "Copy"), 1000);
+  } catch (error) {
+    copyButton.textContent = "Failed";
+    setTimeout(() => (copyButton.textContent = "Copy"), 1000);
+  }
+};
+
+copyButton.addEventListener("click", copyPrompt);
+
 form.addEventListener("submit", async (e) => {
   e.preventDefault();
   const formData = new FormData(form);
