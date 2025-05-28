@@ -2,7 +2,7 @@ import * as dotenv from "dotenv";
 import express from "express";
 import cors from "cors";
 import OpenAI from "openai";
-import { APIClient } from "openai/core.mjs";
+// import { APIClient } from "openai/core.mjs";
 dotenv.config();
 
 const openai = new OpenAI({

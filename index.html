@@ -1,13 +1,24 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
+    <title>AI Image Generator</title>
   </head>
   <body>
-    <div id="app"></div>
+    <main>
+      <h1>AI Image Generator</h1>
+      <div id="result">Image Will Appear Here</div>
+
+      <form action="">
+        <label for="prompt">Prompt</label>
+        <textarea name="prompt" maxlength="150"></textarea>
+
+        <button type="submit">Submit</button>
+      </form>
+    </main>
+
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>
